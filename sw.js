@@ -1,3 +1,6 @@
+/* 
+* Array of files to be cached
+*/
 const cacheFiles = [
     '/',
     '/index.html',
@@ -18,7 +21,9 @@ const cacheFiles = [
     'img/9.jpg',
     'img/10.jpg'
 ];
-
+/* 
+* Listenes for Service Worker(SW) installation event
+*/
 self.addEventListener('install', function(e){
     e.waitUntil(
         caches.open('v1').then(function(cache) {
@@ -26,7 +31,9 @@ self.addEventListener('install', function(e){
         })
     );
 });
-
+/* 
+* Listenes for SW fetching event
+*/
 self.addEventListener('fetch',function(e) {
     e.respondWith(
         caches.match(e.request).then(function(response) {
