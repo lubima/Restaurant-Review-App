@@ -4,7 +4,17 @@ let restaurants,
 var newMap
 var markers = []
 
-/**
+/*  
+* Chech if the browser supports Service Worker and register it if yes
+*/
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+  .register('/sw.js')
+  .catch(function(err) {
+    console.error(err);
+  });
+}
+/*
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -13,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchCuisines();
 });
 
-/**
+/*
  * Fetch all neighborhoods and set their HTML.
  */
 fetchNeighborhoods = () => {
@@ -27,7 +37,7 @@ fetchNeighborhoods = () => {
   });
 }
 
-/**
+/*
  * Set neighborhoods HTML.
  */
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
@@ -40,7 +50,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   });
 }
 
-/**
+/*
  * Fetch all cuisines and set their HTML.
  */
 fetchCuisines = () => {
@@ -54,7 +64,7 @@ fetchCuisines = () => {
   });
 }
 
-/**
+/*
  * Set cuisines HTML.
  */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
@@ -68,7 +78,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
   });
 }
 
-/**
+/*
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
@@ -101,7 +111,7 @@ initMap = () => {
   updateRestaurants();
 } */
 
-/**
+/*
  * Update page and map for current restaurants.
  */
 updateRestaurants = () => {
@@ -124,7 +134,7 @@ updateRestaurants = () => {
   })
 }
 
-/**
+/*
  * Clear current restaurants, their HTML and remove their map markers.
  */
 resetRestaurants = (restaurants) => {
@@ -141,7 +151,7 @@ resetRestaurants = (restaurants) => {
   self.restaurants = restaurants;
 }
 
-/**
+/*
  * Create all restaurants HTML and add them to the webpage.
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
@@ -152,7 +162,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   addMarkersToMap();
 }
 
-/**
+/*
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
